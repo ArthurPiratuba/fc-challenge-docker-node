@@ -1,27 +1,35 @@
+
 version: '3'
-services: 
+services:
   node_app:
     build:
       context: node
     container_name: node_app
+    entrypoint: dockerize -wait tcp://db_app:3306 -timeout 20s docker-entrypoint.sh
     networks:
-      - node-mysql-network
+      - node-network   
+    tty: true
     ports:
-      - "3000:3333"
+      - "3001:3333"
     depends_on:
-      - mysql
-  mysql:
+      - db_app
+  db_app:
     image: mysql:5.7
+    command: --innodb-use-native-aio=0
+    container_name: db_app  
     volumes: 
       - "./mysql:/docker-entrypoint-initdb.d"
-    command: --innodb-use-native-aio=0
-    container_name: mysql
     restart: always
+    tty: true   
     environment:
       - MYSQL_DATABASE=nodedb
       - MYSQL_ROOT_PASSWORD=root
     networks:
-      - node-mysql-network
+      - node-network
 networks:
-  node-mysql-network:
+  node-network:
     driver: bridge
+    
+    
+    
+    

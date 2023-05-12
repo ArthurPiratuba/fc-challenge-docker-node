@@ -1,4 +1,6 @@
-create table name(
+create table people(
     id serial not null primary key,
-    value varchar(255)
+    name varchar(255)
 );
+
+insert into people (name) values ("João");

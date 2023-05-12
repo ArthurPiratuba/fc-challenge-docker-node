@@ -11,17 +11,17 @@ const dbConfig = {
     database: 'nodedb'
 };
 const dbConnection = mysql.createConnection(dbConfig);
-const commands = [
-    "insert into people (name) values ('Arthur')",
-    "insert into people (name) values ('Wesley')"
-];
-for (let command of commands) {
-    dbConnection.query(command);
-};
-dbConnection.end();
+dbConnection.query("insert into people (name) values ('Arthur')");
 
 app.get("/", function (req, res) {
-    res.send("<h1>Full Cycle Rocks!</h1>\n");
+    dbConnection.query("select * from people", function (error, results) {
+        let html = "<h1>Full Cycle Rocks!</h1>";
+        html += "<ul>";
+        for (let result of results)
+            html += "<li>" + result.name + "</li>";
+        html += "</ul>\n";
+        res.send(html);
+    });
 });
 
-app.listen(port, () => console.log("Server listening at port: ", port));
+app.listen(port, console.log("Server listening at port: ", port));

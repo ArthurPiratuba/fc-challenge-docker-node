@@ -3,4 +3,4 @@ create table people(
     name varchar(255)
 );
 
-insert into people (name) values ("João");
+insert into people (name) values ('Wesley');

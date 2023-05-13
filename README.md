@@ -1,4 +1,9 @@
-# Desafio de Docker do curso FullCycle 3.0
+# Desafio do curso FullCycle 3.0
+## Tecnologias:
+- Docker
+- Node
+- Nginx
+- Mysql
 
 Para subir a stack: ```docker compose up -d```  
 Para baixar: ``docker compose down``

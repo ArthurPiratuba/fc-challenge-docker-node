@@ -15,9 +15,12 @@ services:
     networks:
       - node-network
   node_app:
+    image: node_app
     build:
       context: node
     container_name: node_app
+    volumes:
+      - "./node:/usr/src/app"
     entrypoint: dockerize -wait tcp://db_app:3306 -timeout 20s node index
     networks:
       - node-network   
@@ -25,6 +28,7 @@ services:
     depends_on:
       - db_app  
   nginx:
+    image: nginx_app
     build:
       context: nginx
     container_name: nginx_app

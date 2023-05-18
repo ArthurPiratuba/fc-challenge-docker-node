@@ -2,10 +2,10 @@ const express = require("express");
 const mysql = require("mysql");
 
 const app = express();
-const port = 3333;
+const port = 3000;
 
 const dbConfig = {
-    host: 'db_app',
+    host: 'db',
     user: 'root',
     password: 'root',
     database: 'nodedb'
